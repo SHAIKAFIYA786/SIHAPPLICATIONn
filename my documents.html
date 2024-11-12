@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and View Documents</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('img1.jpg') no-repeat center center/cover;
+            overflow: hidden;
+            color: #fff;
+            
+        }
+        
+
+
+        .inner-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            background-image: url(img1.jpg);
+            color: white;
+        }
+        .inner-container label {
+    color: #fff; /* Set label color to white */
+    font-weight: bold; /* Optional: make labels bold */
+}
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .pdf-placeholder {
+            background-color: #e3f2fd;
+            color: #007bff;
+            width: 100px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .pdf-placeholder:hover {
+            background-color: #bbdefb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Modal (popup) styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff5c5c;
+            border: none;
+            color: white;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="inner-container">
+        <h2>Upload Your Required Documents</h2>
+
+        <form id="certificateForm">
+            <!-- Aadhaar Card -->
+            <div class="form-group" id="aadhaarSection">
+                <label>Aadhaar Card</label>
+                <div class="file-info">
+                    <input type="file" id="aadhaarUpload" accept="application/pdf" class="upload-btn" onchange="handleFileUpload('aadhaarUpload', 'aadhaarView')">
+                    <button type="button" class="pdf-placeholder hidden" id="aadhaarView" onclick="openModal('aadhaarUpload')">View Certificate</button>
+                </div>
+            </div>
+
+            <!-- Utility Bills -->
+            <div class="form-group" id="utilitySection">
+                <label>Utility Bills</label>
+                <div class="file-info">
+                    <input type="file" id="utilityUpload" accept="application/pdf" class="upload-btn" onchange="handleFileUpload('utilityUpload', 'utilityView')">
+                    <button type="button" class="pdf-placeholder hidden" id="utilityView" onclick="openModal('utilityUpload')">View Certificate</button>
+                </div>
+            </div>
+
+            <!-- Ration Card -->
+            <div class="form-group" id="rationSection">
+                <label>Ration Card</label>
+                <div class="file-info">
+                    <input type="file" id="rationUpload" accept="application/pdf" class="upload-btn" onchange="handleFileUpload('rationUpload', 'rationView')">
+                    <button type="button" class="pdf-placeholder hidden" id="rationView" onclick="openModal('rationUpload')">View Certificate</button>
+                </div>
+            </div>
+
+            <!-- School Certificate -->
+            <div class="form-group" id="schoolSection">
+                <label>School Certificate</label>
+                <div class="file-info">
+                    <input type="file" id="schoolUpload" accept="application/pdf" class="upload-btn" onchange="handleFileUpload('schoolUpload', 'schoolView')">
+                    <button type="button" class="pdf-placeholder hidden" id="schoolView" onclick="openModal('schoolUpload')">View Certificate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal for displaying PDF -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">Close</button>
+            <iframe id="modalIframe" class="modal-iframe"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleFileUpload(inputId, viewButtonId) {
+        const fileInput = document.getElementById(inputId);
+        const viewButton = document.getElementById(viewButtonId);
+        const section = document.getElementById(inputId + 'Section');
+        
+        const file = fileInput.files[0];
+
+        if (file && file.type === "application/pdf") {
+            // Hide the file input
+            fileInput.classList.add('hidden');
+            // Show the "View Certificate" button
+            viewButton.classList.remove('hidden');
+        } else {
+            alert("Please upload a valid PDF file.");
+        }
+    }
+
+    function openModal(inputId) {
+        const fileInput = document.getElementById(inputId);
+        const file = fileInput.files[0];
+        const modal = document.getElementById('pdfModal');
+        const modalIframe = document.getElementById('modalIframe');
+
+        if (file && file.type === "application/pdf") {
+            const fileURL = URL.createObjectURL(file);
+            modalIframe.src = fileURL;
+            modal.style.display = 'flex';
+        } else {
+            alert("No PDF file uploaded.");
+        }
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('pdfModal');
+        const modalIframe = document.getElementById('modalIframe');
+        modal.style.display = 'none';
+        modalIframe.src = ''; // Clear the src to stop loading the PDF
+    }
+</script>
+
+</body>
+</html>

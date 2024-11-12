@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Progress</title>
+    <style>
+        /* Basic Styling for the Progress Page */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            background-image: url(img1.jpg);
+        }
+
+        .progress-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background-image: url(img1.jpg);
+            border: 1px solid white;
+        }
+
+        .progress-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #f4f4f4;
+        }
+
+        .certificate-status {
+            font-size: 18px;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        .status {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .expected-date {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .download-button {
+            display: none; /* Hide by default, will show when completed */
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-left: 300px;
+        }
+
+        .download-button:hover {
+            background-color: #218838;
+        }
+        .track-progress h3{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+        <h2>Your Certificate Progress</h2>
+        
+        <!-- Certificate Progress Block -->
+        <div class="certificate-status">
+            <p><strong>Certificate: </strong>Aadhaar Card</p>
+            <p class="status">Status: <span id="certificateStatus">Pending</span></p>
+            <p class="expected-date" id="expectedDate">Expected Date: <span id="date">25th Dec 2024</span></p>
+
+            <!-- Download Button will be shown if completed -->
+            <button class="download-button" id="downloadButton" onclick="downloadCertificate()">Download Certificate</button>
+        </div>
+
+        <!-- Track My Progress Section -->
+        <div class="track-progress">
+            <!-- <h3>Track My Progress</h3> -->
+            <button onclick="updateStatus()">Check Status</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to simulate updating the status of the certificate
+        function updateStatus() {
+            let status = document.getElementById('certificateStatus').innerText;
+            if (status === "Pending") {
+                // Simulate that the certificate has been completed
+                document.getElementById('certificateStatus').innerText = "Completed";
+                document.getElementById('expectedDate').style.display = "none"; // Hide expected date
+                document.getElementById('downloadButton').style.display = "block"; // Show download button
+            }
+        }
+
+        // Function to simulate downloading the certificate
+        function downloadCertificate() {
+            alert('Your certificate has been downloaded!');
+        }
+        function redirectToProgressPage() {
+            window.location.href = 'progress.html'; // Redirect to progress page
+        }
+    </script>
+
+</body>
+</html>

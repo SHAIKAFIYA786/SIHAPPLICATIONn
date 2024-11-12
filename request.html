@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Documents</title>
+    <style>
+        /* Fixed Background Image for the entire page */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background: url('img1.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Container for the upper div */
+        .content-container {
+            position: relative;
+            z-index: 2;  /* Ensure this content appears above the background */
+            padding: 40px;
+            color: #fff;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.6); /* semi-transparent background */
+            border-radius: 8px;
+            margin-top: 100px;
+        }
+
+        /* Heading Style */
+        .content-container h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Certificate Display Section */
+        .certificate-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .certificate-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer; /* Make it look clickable */
+        }
+
+        .certificate-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .certificate-item p {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        /* Apply Button Style */
+        .apply-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Success Message Style */
+        .success-message {
+            font-size: 18px;
+            color: #28a745; /* Green color for success */
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content Container -->
+    <div class="content-container">
+        <h1>Verify Your Documents</h1>
+
+        <!-- Certificates Section -->
+        <div class="certificate-section">
+            <div class="certificate-item" onclick="showSuccessMessage()">
+                <img src="pan.jpg" alt="Aadhaar Card">
+                <p>Aadhaar Card</p>
+            </div>
+            <div class="certificate-item" onclick="showSuccessMessage()">
+                <img src="ration.jpeg" alt="Utility Bills">
+                <p>Utility Bills</p>
+            </div>
+            <div class="certificate-item" onclick="showSuccessMessage()">
+                <img src="current.jpeg" alt="Ration Card">
+                <p>Ration Card</p>
+            </div>
+            <div class="certificate-item" onclick="showSuccessMessage()">
+                <img src="aadhar.jpeg" alt="School Certificate">
+                <p>School Certificate</p>
+            </div>
+            <!-- <div class="certificate-item" onclick="showSuccessMessage()">
+                <img src="img1.jpg" alt="Income Certificate">
+                <p>Income Certificate</p>
+            </div> -->
+        </div>
+
+        <!-- Apply Button -->
+        <button class="apply-button" onclick="showSuccessMessage()">Apply for Certificate</button>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            Request made successfully!
+        </div>
+    </div>
+
+    <script>
+        // Function to display the success message
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';  // Show the message when certificate is clicked
+        }
+    </script>
+
+</body>
+</html>
